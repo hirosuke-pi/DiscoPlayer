@@ -38,6 +38,8 @@
             this.label4 = new System.Windows.Forms.Label();
             this.guild_id_textBox = new System.Windows.Forms.TextBox();
             this.channel_state_label = new System.Windows.Forms.Label();
+            this.channel_in_button = new System.Windows.Forms.Button();
+            this.channel_out_button = new System.Windows.Forms.Button();
             this.player_trackBar = new System.Windows.Forms.TrackBar();
             this.player_groupBox = new System.Windows.Forms.GroupBox();
             this.volume_checkBox = new System.Windows.Forms.CheckBox();
@@ -46,29 +48,27 @@
             this.musicRepeat_checkBox = new System.Windows.Forms.CheckBox();
             this.volume_groupBox = new System.Windows.Forms.GroupBox();
             this.volume_trackBar = new System.Windows.Forms.TrackBar();
+            this.next_button = new System.Windows.Forms.Button();
+            this.prev_button = new System.Windows.Forms.Button();
             this.mp3_title_textBox = new System.Windows.Forms.TextBox();
             this.time_label = new System.Windows.Forms.Label();
             this.player_label = new System.Windows.Forms.Label();
-            this.wave_rate_groupBox = new System.Windows.Forms.GroupBox();
-            this.wave_rate_trackBar = new System.Windows.Forms.TrackBar();
-            this.mp3_openFileDialog = new System.Windows.Forms.OpenFileDialog();
-            this.playlist_groupBox = new System.Windows.Forms.GroupBox();
-            this.clear_playlist_button = new System.Windows.Forms.Button();
-            this.playlist_listBox = new System.Windows.Forms.ListBox();
-            this.music_folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
-            this.playList_saveFileDialog = new System.Windows.Forms.SaveFileDialog();
-            this.clear_rate_button = new System.Windows.Forms.Button();
-            this.delete_music_button = new System.Windows.Forms.Button();
-            this.save_playlist_button = new System.Windows.Forms.Button();
-            this.file_browse_button = new System.Windows.Forms.Button();
-            this.folder_browse_button = new System.Windows.Forms.Button();
-            this.channel_in_button = new System.Windows.Forms.Button();
-            this.channel_out_button = new System.Windows.Forms.Button();
-            this.next_button = new System.Windows.Forms.Button();
-            this.prev_button = new System.Windows.Forms.Button();
             this.player_stop_button = new System.Windows.Forms.Button();
             this.player_play_button = new System.Windows.Forms.Button();
             this.player_pause_button = new System.Windows.Forms.Button();
+            this.wave_rate_groupBox = new System.Windows.Forms.GroupBox();
+            this.clear_rate_button = new System.Windows.Forms.Button();
+            this.wave_rate_trackBar = new System.Windows.Forms.TrackBar();
+            this.mp3_openFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.playlist_groupBox = new System.Windows.Forms.GroupBox();
+            this.delete_music_button = new System.Windows.Forms.Button();
+            this.clear_playlist_button = new System.Windows.Forms.Button();
+            this.save_playlist_button = new System.Windows.Forms.Button();
+            this.playlist_listBox = new System.Windows.Forms.ListBox();
+            this.file_browse_button = new System.Windows.Forms.Button();
+            this.folder_browse_button = new System.Windows.Forms.Button();
+            this.music_folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
+            this.playList_saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.player_trackBar)).BeginInit();
@@ -186,6 +186,34 @@
             this.channel_state_label.Text = "接続されていません";
             this.channel_state_label.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
+            // channel_in_button
+            // 
+            this.channel_in_button.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.channel_in_button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.channel_in_button.Image = global::DiscoPlayer.Properties.Resources.icons8_connected_16;
+            this.channel_in_button.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.channel_in_button.Location = new System.Drawing.Point(216, 81);
+            this.channel_in_button.Name = "channel_in_button";
+            this.channel_in_button.Size = new System.Drawing.Size(96, 23);
+            this.channel_in_button.TabIndex = 3;
+            this.channel_in_button.Text = "接続";
+            this.channel_in_button.UseVisualStyleBackColor = true;
+            this.channel_in_button.Click += new System.EventHandler(this.Channnel_in_button_Click);
+            // 
+            // channel_out_button
+            // 
+            this.channel_out_button.Enabled = false;
+            this.channel_out_button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.channel_out_button.Image = global::DiscoPlayer.Properties.Resources.icons8_disconnected_16;
+            this.channel_out_button.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.channel_out_button.Location = new System.Drawing.Point(317, 81);
+            this.channel_out_button.Name = "channel_out_button";
+            this.channel_out_button.Size = new System.Drawing.Size(96, 23);
+            this.channel_out_button.TabIndex = 0;
+            this.channel_out_button.Text = "切断";
+            this.channel_out_button.UseVisualStyleBackColor = true;
+            this.channel_out_button.Click += new System.EventHandler(this.Channel_out_button_Click);
+            // 
             // player_trackBar
             // 
             this.player_trackBar.AutoSize = false;
@@ -293,6 +321,30 @@
             this.volume_trackBar.Value = 100;
             this.volume_trackBar.Scroll += new System.EventHandler(this.Volume_trackBar_Scroll);
             // 
+            // next_button
+            // 
+            this.next_button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.next_button.Image = global::DiscoPlayer.Properties.Resources.icons8_end_40;
+            this.next_button.Location = new System.Drawing.Point(380, 92);
+            this.next_button.Name = "next_button";
+            this.next_button.Size = new System.Drawing.Size(33, 53);
+            this.next_button.TabIndex = 15;
+            this.next_button.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.next_button.UseVisualStyleBackColor = true;
+            this.next_button.Click += new System.EventHandler(this.Next_button_Click);
+            // 
+            // prev_button
+            // 
+            this.prev_button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.prev_button.Image = global::DiscoPlayer.Properties.Resources.icons8_skip_to_start_40;
+            this.prev_button.Location = new System.Drawing.Point(9, 92);
+            this.prev_button.Name = "prev_button";
+            this.prev_button.Size = new System.Drawing.Size(33, 53);
+            this.prev_button.TabIndex = 14;
+            this.prev_button.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.prev_button.UseVisualStyleBackColor = true;
+            this.prev_button.Click += new System.EventHandler(this.Prev_button_Click);
+            // 
             // mp3_title_textBox
             // 
             this.mp3_title_textBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
@@ -326,6 +378,44 @@
             this.player_label.Text = "停止";
             this.player_label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // player_stop_button
+            // 
+            this.player_stop_button.Enabled = false;
+            this.player_stop_button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.player_stop_button.Image = global::DiscoPlayer.Properties.Resources.icons8_stop_40;
+            this.player_stop_button.Location = new System.Drawing.Point(269, 92);
+            this.player_stop_button.Name = "player_stop_button";
+            this.player_stop_button.Size = new System.Drawing.Size(105, 53);
+            this.player_stop_button.TabIndex = 6;
+            this.player_stop_button.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.player_stop_button.UseVisualStyleBackColor = true;
+            this.player_stop_button.Click += new System.EventHandler(this.Player_stop_button_Click);
+            // 
+            // player_play_button
+            // 
+            this.player_play_button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.player_play_button.Image = global::DiscoPlayer.Properties.Resources.icons8_play_40;
+            this.player_play_button.Location = new System.Drawing.Point(48, 92);
+            this.player_play_button.Name = "player_play_button";
+            this.player_play_button.Size = new System.Drawing.Size(104, 53);
+            this.player_play_button.TabIndex = 5;
+            this.player_play_button.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.player_play_button.UseVisualStyleBackColor = true;
+            this.player_play_button.Click += new System.EventHandler(this.Player_play_button_Click);
+            // 
+            // player_pause_button
+            // 
+            this.player_pause_button.Enabled = false;
+            this.player_pause_button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.player_pause_button.Image = global::DiscoPlayer.Properties.Resources.icons8_pause_40;
+            this.player_pause_button.Location = new System.Drawing.Point(158, 92);
+            this.player_pause_button.Name = "player_pause_button";
+            this.player_pause_button.Size = new System.Drawing.Size(105, 53);
+            this.player_pause_button.TabIndex = 4;
+            this.player_pause_button.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.player_pause_button.UseVisualStyleBackColor = true;
+            this.player_pause_button.Click += new System.EventHandler(this.Player_pause_button_Click);
+            // 
             // wave_rate_groupBox
             // 
             this.wave_rate_groupBox.Controls.Add(this.clear_rate_button);
@@ -337,6 +427,18 @@
             this.wave_rate_groupBox.TabIndex = 4;
             this.wave_rate_groupBox.TabStop = false;
             this.wave_rate_groupBox.Text = "周波数: 48000Hz";
+            // 
+            // clear_rate_button
+            // 
+            this.clear_rate_button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.clear_rate_button.Image = global::DiscoPlayer.Properties.Resources.icons8_refresh_16;
+            this.clear_rate_button.Location = new System.Drawing.Point(625, 22);
+            this.clear_rate_button.Name = "clear_rate_button";
+            this.clear_rate_button.Size = new System.Drawing.Size(27, 33);
+            this.clear_rate_button.TabIndex = 16;
+            this.clear_rate_button.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.clear_rate_button.UseVisualStyleBackColor = true;
+            this.clear_rate_button.Click += new System.EventHandler(this.Clear_rate_button_Click);
             // 
             // wave_rate_trackBar
             // 
@@ -377,6 +479,17 @@
             this.playlist_groupBox.TabStop = false;
             this.playlist_groupBox.Text = "プレイリスト: 0/0";
             // 
+            // delete_music_button
+            // 
+            this.delete_music_button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.delete_music_button.Image = global::DiscoPlayer.Properties.Resources.icons8_delete_16;
+            this.delete_music_button.Location = new System.Drawing.Point(166, 325);
+            this.delete_music_button.Name = "delete_music_button";
+            this.delete_music_button.Size = new System.Drawing.Size(26, 23);
+            this.delete_music_button.TabIndex = 19;
+            this.delete_music_button.UseVisualStyleBackColor = true;
+            this.delete_music_button.Click += new System.EventHandler(this.Delete_music_button_Click);
+            // 
             // clear_playlist_button
             // 
             this.clear_playlist_button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -387,6 +500,17 @@
             this.clear_playlist_button.TabIndex = 18;
             this.clear_playlist_button.UseVisualStyleBackColor = true;
             this.clear_playlist_button.Click += new System.EventHandler(this.Clear_playlist_button_Click);
+            // 
+            // save_playlist_button
+            // 
+            this.save_playlist_button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.save_playlist_button.Image = global::DiscoPlayer.Properties.Resources.icons8_save_16;
+            this.save_playlist_button.Location = new System.Drawing.Point(70, 325);
+            this.save_playlist_button.Name = "save_playlist_button";
+            this.save_playlist_button.Size = new System.Drawing.Size(26, 23);
+            this.save_playlist_button.TabIndex = 17;
+            this.save_playlist_button.UseVisualStyleBackColor = true;
+            this.save_playlist_button.Click += new System.EventHandler(this.Save_playlist_button_Click);
             // 
             // playlist_listBox
             // 
@@ -405,46 +529,6 @@
             this.playlist_listBox.SelectedIndexChanged += new System.EventHandler(this.Playlist_listBox_SelectedIndexChanged);
             this.playlist_listBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Playlist_listBox_MouseDown);
             this.playlist_listBox.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Playlist_listBox_MouseUp);
-            // 
-            // playList_saveFileDialog
-            // 
-            this.playList_saveFileDialog.FileName = "NewPlayList1";
-            this.playList_saveFileDialog.Filter = "プレイリスト|*.playlist";
-            this.playList_saveFileDialog.Title = "プレイリストを保存";
-            // 
-            // clear_rate_button
-            // 
-            this.clear_rate_button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.clear_rate_button.Image = global::DiscoPlayer.Properties.Resources.icons8_refresh_16;
-            this.clear_rate_button.Location = new System.Drawing.Point(625, 22);
-            this.clear_rate_button.Name = "clear_rate_button";
-            this.clear_rate_button.Size = new System.Drawing.Size(27, 33);
-            this.clear_rate_button.TabIndex = 16;
-            this.clear_rate_button.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.clear_rate_button.UseVisualStyleBackColor = true;
-            this.clear_rate_button.Click += new System.EventHandler(this.Clear_rate_button_Click);
-            // 
-            // delete_music_button
-            // 
-            this.delete_music_button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.delete_music_button.Image = global::DiscoPlayer.Properties.Resources.icons8_delete_16;
-            this.delete_music_button.Location = new System.Drawing.Point(166, 325);
-            this.delete_music_button.Name = "delete_music_button";
-            this.delete_music_button.Size = new System.Drawing.Size(26, 23);
-            this.delete_music_button.TabIndex = 19;
-            this.delete_music_button.UseVisualStyleBackColor = true;
-            this.delete_music_button.Click += new System.EventHandler(this.Delete_music_button_Click);
-            // 
-            // save_playlist_button
-            // 
-            this.save_playlist_button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.save_playlist_button.Image = global::DiscoPlayer.Properties.Resources.icons8_save_16;
-            this.save_playlist_button.Location = new System.Drawing.Point(70, 325);
-            this.save_playlist_button.Name = "save_playlist_button";
-            this.save_playlist_button.Size = new System.Drawing.Size(26, 23);
-            this.save_playlist_button.TabIndex = 17;
-            this.save_playlist_button.UseVisualStyleBackColor = true;
-            this.save_playlist_button.Click += new System.EventHandler(this.Save_playlist_button_Click);
             // 
             // file_browse_button
             // 
@@ -468,95 +552,11 @@
             this.folder_browse_button.UseVisualStyleBackColor = true;
             this.folder_browse_button.Click += new System.EventHandler(this.Folder_browse_button_Click);
             // 
-            // channel_in_button
+            // playList_saveFileDialog
             // 
-            this.channel_in_button.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.channel_in_button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.channel_in_button.Image = global::DiscoPlayer.Properties.Resources.icons8_connected_16;
-            this.channel_in_button.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.channel_in_button.Location = new System.Drawing.Point(216, 81);
-            this.channel_in_button.Name = "channel_in_button";
-            this.channel_in_button.Size = new System.Drawing.Size(96, 23);
-            this.channel_in_button.TabIndex = 3;
-            this.channel_in_button.Text = "接続";
-            this.channel_in_button.UseVisualStyleBackColor = true;
-            this.channel_in_button.Click += new System.EventHandler(this.Channnel_in_button_Click);
-            // 
-            // channel_out_button
-            // 
-            this.channel_out_button.Enabled = false;
-            this.channel_out_button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.channel_out_button.Image = global::DiscoPlayer.Properties.Resources.icons8_disconnected_16;
-            this.channel_out_button.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.channel_out_button.Location = new System.Drawing.Point(317, 81);
-            this.channel_out_button.Name = "channel_out_button";
-            this.channel_out_button.Size = new System.Drawing.Size(96, 23);
-            this.channel_out_button.TabIndex = 0;
-            this.channel_out_button.Text = "切断";
-            this.channel_out_button.UseVisualStyleBackColor = true;
-            this.channel_out_button.Click += new System.EventHandler(this.Channel_out_button_Click);
-            // 
-            // next_button
-            // 
-            this.next_button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.next_button.Image = global::DiscoPlayer.Properties.Resources.icons8_end_40;
-            this.next_button.Location = new System.Drawing.Point(380, 92);
-            this.next_button.Name = "next_button";
-            this.next_button.Size = new System.Drawing.Size(33, 53);
-            this.next_button.TabIndex = 15;
-            this.next_button.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.next_button.UseVisualStyleBackColor = true;
-            this.next_button.Click += new System.EventHandler(this.Next_button_Click);
-            // 
-            // prev_button
-            // 
-            this.prev_button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.prev_button.Image = global::DiscoPlayer.Properties.Resources.icons8_skip_to_start_40;
-            this.prev_button.Location = new System.Drawing.Point(9, 92);
-            this.prev_button.Name = "prev_button";
-            this.prev_button.Size = new System.Drawing.Size(33, 53);
-            this.prev_button.TabIndex = 14;
-            this.prev_button.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.prev_button.UseVisualStyleBackColor = true;
-            this.prev_button.Click += new System.EventHandler(this.Prev_button_Click);
-            // 
-            // player_stop_button
-            // 
-            this.player_stop_button.Enabled = false;
-            this.player_stop_button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.player_stop_button.Image = global::DiscoPlayer.Properties.Resources.icons8_stop_40;
-            this.player_stop_button.Location = new System.Drawing.Point(269, 92);
-            this.player_stop_button.Name = "player_stop_button";
-            this.player_stop_button.Size = new System.Drawing.Size(105, 53);
-            this.player_stop_button.TabIndex = 6;
-            this.player_stop_button.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.player_stop_button.UseVisualStyleBackColor = true;
-            this.player_stop_button.Click += new System.EventHandler(this.Player_stop_button_Click);
-            // 
-            // player_play_button
-            // 
-            this.player_play_button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.player_play_button.Image = global::DiscoPlayer.Properties.Resources.icons8_play_40;
-            this.player_play_button.Location = new System.Drawing.Point(48, 92);
-            this.player_play_button.Name = "player_play_button";
-            this.player_play_button.Size = new System.Drawing.Size(104, 53);
-            this.player_play_button.TabIndex = 5;
-            this.player_play_button.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.player_play_button.UseVisualStyleBackColor = true;
-            this.player_play_button.Click += new System.EventHandler(this.Player_play_button_Click);
-            // 
-            // player_pause_button
-            // 
-            this.player_pause_button.Enabled = false;
-            this.player_pause_button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.player_pause_button.Image = global::DiscoPlayer.Properties.Resources.icons8_pause_40;
-            this.player_pause_button.Location = new System.Drawing.Point(158, 92);
-            this.player_pause_button.Name = "player_pause_button";
-            this.player_pause_button.Size = new System.Drawing.Size(105, 53);
-            this.player_pause_button.TabIndex = 4;
-            this.player_pause_button.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.player_pause_button.UseVisualStyleBackColor = true;
-            this.player_pause_button.Click += new System.EventHandler(this.Player_pause_button_Click);
+            this.playList_saveFileDialog.FileName = "NewPlayList1";
+            this.playList_saveFileDialog.Filter = "プレイリスト|*.playlist";
+            this.playList_saveFileDialog.Title = "プレイリストを保存";
             // 
             // Main
             // 
@@ -576,7 +576,7 @@
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.MaximizeBox = false;
             this.Name = "Main";
-            this.Text = "DiscoPlayer v1.00";
+            this.Text = "DiscoPlayer v1.10";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Main_FormClosing);
             this.Load += new System.EventHandler(this.Main_Load);
             this.DragDrop += new System.Windows.Forms.DragEventHandler(this.Main_DragDrop);

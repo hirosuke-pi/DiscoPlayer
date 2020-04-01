@@ -97,6 +97,7 @@ namespace DiscoPlayer
         public List<string> tmpPlayList = new List<string>() { };
 
         public bool randomFlag = false;
+        public bool exitFlag = false;
         public bool pingFlag = false;
         public bool playerActive = false;
         public bool pauseFlag = false;
@@ -356,6 +357,12 @@ namespace DiscoPlayer
                     }
                 });
             }
+
+            playFlag = false;
+            playerCurrentTask = null;
+            waitFlag = false;
+            nextFlag = false;
+            prevFlag = false;
         }
 
         public async Task connectionPing_Loop(SocketVoiceChannel vchannel)
@@ -380,7 +387,7 @@ namespace DiscoPlayer
         {
             Invoke((Action)delegate ()
             {
-                player_trackBar.Maximum = (int)render.TotalTime.TotalSeconds;
+               if (render != null) player_trackBar.Maximum = (int)render.TotalTime.TotalSeconds;
             });
             while (playFlag)
             {
@@ -443,13 +450,15 @@ namespace DiscoPlayer
 
         private void Channel_out_button_Click(object sender, EventArgs e)
         {
+            exitFlag = false;
             Task.Run(() => {
-                try
-                {
-                    LogoutAsync().Wait();
-                }
-                catch { }
+                LogoutAsync().Wait();
             });
+
+            Task.Run(() => {
+                LogoutAsyncWatch().Wait();
+            });
+
         }
 
         public async Task LogoutAsync()
@@ -459,9 +468,13 @@ namespace DiscoPlayer
             playerInitalize_Invoke();
             pingFlag = false;
             playerActive = false;
-            stopFlag = true;
-            pingTask.Wait();
-            playerTask.Wait();
+            Invoke((Action)delegate ()
+            {
+                Player_stop_button_Click(null, EventArgs.Empty);
+            });
+
+            if (playerTask != null) playerTask.Wait();
+            if (playerCurrentTask != null) playerCurrentTask.Wait();
             await Client.StopAsync();
             await Client.LogoutAsync();
             channelLog_Invoke("接続されていません", RED);
@@ -471,7 +484,38 @@ namespace DiscoPlayer
             {
                 playList_enable(true);
                 randomPlay_checkBox.Enabled = true;
+                next_button.Enabled = true;
+                prev_button.Enabled = true;
             });
+            exitFlag = true;
+        }
+
+        public async Task LogoutAsyncWatch()
+        {
+            int count = 0;
+            while (true)
+            {
+                count++;
+                await Task.Delay(500);
+                if (exitFlag)
+                    return;
+                else if (count > 20)
+                    break;
+            }
+
+            pingFlag = false;
+            playerActive = false;
+            playerInitalize_Invoke();
+            Invoke((Action)delegate ()
+            {
+                Player_stop_button_Click(null, EventArgs.Empty);
+                playList_enable(true);
+                randomPlay_checkBox.Enabled = true;
+                next_button.Enabled = true;
+                prev_button.Enabled = true;
+            });
+            enableControl_Invoke(false, false);
+            channelLog_Invoke("接続されていません", RED);
         }
 
 
