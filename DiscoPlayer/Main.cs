@@ -12,6 +12,7 @@ using System.IO;
 
 
 using NAudio.Wave;
+using NAudio.CoreAudioApi;
 using Discord.Audio;
 using Discord;
 using Discord.WebSocket;
@@ -40,6 +41,10 @@ namespace DiscoPlayer
         {
             try
             {
+                if (status == "")
+                    Text = tmpTitle;
+                else
+                    Text = tmpTitle + " - Playing: " + status;
                 botActivity.SetName = status;
                 botActivity.SetType = activityType;
                 Client.SetActivityAsync(botActivity);
@@ -54,6 +59,10 @@ namespace DiscoPlayer
 
             configPath = Path.GetDirectoryName(Application.ExecutablePath) + @"\config.ini";
             List<string> configList = new List<string>() { };
+            
+            int vol = 100;
+            int h = Height;
+            int w = Width;
 
             if (File.Exists(configPath))
             {
@@ -64,6 +73,7 @@ namespace DiscoPlayer
                         configList.Add(sr.ReadLine());
                     }
                 }
+                
 
                 if (configList.Count >= 1)
                     token_textBox.Text = configList[0];
@@ -73,8 +83,25 @@ namespace DiscoPlayer
                     voicechannel_id_textBox.Text = configList[2];
                 if (configList.Count >= 4)
                     addPlayList_Async(new string[] { configList[3] });
+                if (configList.Count >= 5 && int.TryParse(configList[4], out vol))
+                {
+                    volume_trackBar.Value = vol;
+                    volume_groupBox.Text = "音量: " + volume_trackBar.Value.ToString();
+                }
+                if (configList.Count >= 6 && int.TryParse(configList[5], out w))
+                    Width = w;
+                if (configList.Count >= 7 && int.TryParse(configList[6], out h))
+                    Height = h;
 
             }
+
+            tmpTitle = Text;
+            for (int i = 0; i < WaveIn.DeviceCount; i++)
+            {
+                var cap = WaveIn.GetCapabilities(i);
+                waveIn_comboBox.Items.Add(cap.ProductName);
+            }
+
         }
 
 
@@ -89,7 +116,12 @@ namespace DiscoPlayer
         public AudioFileReader AudioReader = null;
         public botActivityObj botActivity = new botActivityObj();
 
+        public WaveInEvent waveIn;
+        public AudioOutStream dscStream;
+        public int waveInBlockSize = 0;
+
         public string configPath = "";
+        public string tmpTitle = "";
         public List<string> playList = new List<string>() { };
         public int playIndex = -1;
         public int waveRate = 48000;
@@ -233,10 +265,15 @@ namespace DiscoPlayer
                 waitFlag = false;
                 nextFlag = false;
                 prevFlag = false;
+                bool errorFlag = false;
 
                 try
                 {
                     AudioReader = new AudioFileReader(playList[playIndex]); // Create a new Disposable MP3FileReader, to read audio from the filePath parameter
+                    Invoke((Action)delegate ()
+                    {
+                        AudioReader.Volume = (float)(volume_trackBar.Value * 0.01);
+                    });
                     var OutFormat = new WaveFormat(waveRate, 16, 2); // Create a new Output Format, using the spec that Discord will accept, and with the number of channels that our client supports.
                     using (var resampler = new MediaFoundationResampler(AudioReader, OutFormat)) // Create a Disposable Resampler, which will convert the read MP3 data to PCM, using our Output Format
                     using (var dstream = Vclient.CreatePCMStream(AudioApplication.Music))
@@ -251,7 +288,7 @@ namespace DiscoPlayer
                         {
                             try
                             {
-                                playerCurrentTime(AudioReader).Wait();
+                                playerCurrentTime().Wait();
                             }catch { }
                         });
 
@@ -314,6 +351,7 @@ namespace DiscoPlayer
                         MessageBox.Show("ファイルオープンに失敗しました: \r\n" + e.Message, Path.GetFileName(playList[playIndex]), MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     });
                     Console.WriteLine(e.ToString());
+                    errorFlag = true;
                 }
                 catch (InvalidOperationException e)
                 {
@@ -323,6 +361,7 @@ namespace DiscoPlayer
                         MessageBox.Show("サポートされていない形式です: \r\n" + e.Message, Path.GetFileName(playList[playIndex]), MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     });
                     Console.WriteLine(e.ToString());
+                    errorFlag = true;
                 }
                 catch (System.Runtime.InteropServices.COMException e)
                 {
@@ -332,6 +371,7 @@ namespace DiscoPlayer
                         MessageBox.Show("ファイル変換に失敗しました: \r\n" + e.Message, Path.GetFileName(playList[playIndex]), MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     });
                     Console.WriteLine(e.ToString());
+                    errorFlag = true;
                 }
                 catch (Exception e)
                 {
@@ -339,6 +379,7 @@ namespace DiscoPlayer
                     Console.WriteLine(e.ToString());
                     Channel_out_button_Click(null, EventArgs.Empty);
                     MessageBox.Show("エラーが発生しました: " + e.Message, "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    errorFlag = true;
                     break;
                 }
 
@@ -350,7 +391,7 @@ namespace DiscoPlayer
                 {
                     if (playIndex < playList.Count - 1)
                         nextFlag = true;
-                    else if (allMusicRepeat_checkBox.Checked)
+                    else if (allMusicRepeat_checkBox.Checked && !errorFlag)
                     {
                         playlist_listBox.SelectedIndex = 0;
                         Player_play_button_Click(null, EventArgs.Empty);
@@ -383,11 +424,11 @@ namespace DiscoPlayer
             });
         }
 
-        public async Task playerCurrentTime(AudioFileReader render)
+        public async Task playerCurrentTime()
         {
             Invoke((Action)delegate ()
             {
-               if (render != null) player_trackBar.Maximum = (int)render.TotalTime.TotalSeconds;
+               if (AudioReader != null) player_trackBar.Maximum = (int)AudioReader.TotalTime.TotalSeconds;
             });
             while (playFlag)
             {
@@ -397,8 +438,8 @@ namespace DiscoPlayer
                     {
                         try
                         {
-                            time_label.Text = render.CurrentTime.ToString(@"hh\:mm\:ss") + " / " + render.TotalTime.ToString(@"hh\:mm\:ss");
-                            player_trackBar.Value = (int)render.CurrentTime.TotalSeconds;
+                            time_label.Text = AudioReader.CurrentTime.ToString(@"hh\:mm\:ss") + " / " + AudioReader.TotalTime.ToString(@"hh\:mm\:ss");
+                            player_trackBar.Value = (int)AudioReader.CurrentTime.TotalSeconds;
                         } catch { }
 
                     });
@@ -414,6 +455,7 @@ namespace DiscoPlayer
                 if (all)
                 {
                     player_groupBox.Enabled = flag;
+                    waveIn_groupBox.Enabled = flag;
                     channel_out_button.Enabled = !flag;
                     channel_in_button.Enabled = flag;
                     guild_id_textBox.ReadOnly = !flag;
@@ -423,6 +465,7 @@ namespace DiscoPlayer
                 else
                 {
                     player_groupBox.Enabled = flag;
+                    waveIn_groupBox.Enabled = flag;
                     channel_out_button.Enabled = flag;
                     channel_in_button.Enabled = !flag;
                     guild_id_textBox.ReadOnly = flag;
@@ -450,6 +493,14 @@ namespace DiscoPlayer
 
         private void Channel_out_button_Click(object sender, EventArgs e)
         {
+            /*
+            if (waveIn_stop_button.Enabled)
+            {
+                MessageBox.Show("切断する場合は、入力デバイス音源を停止させてください。", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            */
+
             exitFlag = false;
             Task.Run(() => {
                 LogoutAsync().Wait();
@@ -470,6 +521,7 @@ namespace DiscoPlayer
             playerActive = false;
             Invoke((Action)delegate ()
             {
+                waveIn_stop_button_Click(null, EventArgs.Empty);
                 Player_stop_button_Click(null, EventArgs.Empty);
             });
 
@@ -508,6 +560,7 @@ namespace DiscoPlayer
             playerInitalize_Invoke();
             Invoke((Action)delegate ()
             {
+                waveIn_stop_button_Click(null, EventArgs.Empty);
                 Player_stop_button_Click(null, EventArgs.Empty);
                 playList_enable(true);
                 randomPlay_checkBox.Enabled = true;
@@ -527,6 +580,7 @@ namespace DiscoPlayer
                 player_pause_button.Enabled = true;
                 player_play_button.Enabled = false;
                 player_stop_button.Enabled = true;
+                waveIn_groupBox.Enabled = false;
                 player_label.Text = "再生中";
                 player_label.ForeColor = GREEN;
                 playList_enable(false);
@@ -545,6 +599,7 @@ namespace DiscoPlayer
                     file_browse_button.Enabled = false;
                     wave_rate_groupBox.Enabled = false;
                     randomPlay_checkBox.Enabled = false;
+                    waveIn_groupBox.Enabled = false;
                     playList_enable(false);
                     setBotActivity(Path.GetFileName(playList[playIndex]), ActivityType.Listening);
                 }
@@ -580,6 +635,7 @@ namespace DiscoPlayer
                 player_stop_button.Enabled = true;
                 player_label.Text = "一時停止";
                 player_label.ForeColor = ORANGE;
+                waveIn_groupBox.Enabled = true;
             }
         }
 
@@ -597,6 +653,7 @@ namespace DiscoPlayer
             file_browse_button.Enabled = true;
             wave_rate_groupBox.Enabled = true;
             randomPlay_checkBox.Enabled = true;
+            waveIn_groupBox.Enabled = true;
             setBotActivity("", ActivityType.Listening);
             playList_enable(true);
         }
@@ -651,6 +708,9 @@ namespace DiscoPlayer
                 sw.WriteLine(guild_id_textBox.Text);
                 sw.WriteLine(voicechannel_id_textBox.Text);
                 sw.WriteLine(defaultPLPath);
+                sw.WriteLine(volume_trackBar.Value.ToString());
+                sw.WriteLine(Width.ToString());
+                sw.WriteLine(Height.ToString());
             }
         }
 
@@ -933,20 +993,21 @@ namespace DiscoPlayer
             }
         }
 
-
+        public int volumeVal = 0;
         private void Volume_checkBox_CheckedChanged(object sender, EventArgs e)
         {
             if (volume_checkBox.Checked)
             {
                 volume_trackBar.Maximum = 1000;
                 volume_trackBar.TickFrequency = 100;
-                Size = new Size(700, 580);
+                Height = 635;
+                volumeVal = volume_trackBar.Value;
             }
             else
             {
-                Size = new Size(700, 490);
-                volume_groupBox.Text = "音量: 100";
-                volume_trackBar.Value = 100;
+                Height = 555;
+                volume_groupBox.Text = "音量: "+ volumeVal.ToString();
+                volume_trackBar.Value = volumeVal;
                 volume_trackBar.Maximum = 100;
                 volume_trackBar.TickFrequency = 25;
 
@@ -954,7 +1015,7 @@ namespace DiscoPlayer
                 {
                     try
                     {
-                        AudioReader.Volume = 1.0f;
+                        AudioReader.Volume = (float)(volume_trackBar.Value * 0.01);
                     }
                     catch (Exception err) { Console.WriteLine(err.ToString()); }
                 }
@@ -1006,6 +1067,80 @@ namespace DiscoPlayer
             wave_rate_trackBar.Value = 48000;
             wave_rate_groupBox.Text = "周波数: " + wave_rate_trackBar.Value.ToString() + "Hz";
             
+        }
+
+        private void waveIn_reload_button_Click(object sender, EventArgs e)
+        {
+            waveIn_comboBox.Items.Clear();
+            for (int i = 0; i < WaveIn.DeviceCount; i++)
+            {
+                var cap = WaveIn.GetCapabilities(i);
+                waveIn_comboBox.Items.Add(cap.ProductName);
+            }
+        }
+
+        private void waveIn_play_button_Click(object sender, EventArgs e)
+        {
+            if (waveIn_comboBox.SelectedIndex == -1)
+            {
+                MessageBox.Show("入力デバイスが選択されていません。", "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+
+            int deviceNumber = waveIn_comboBox.SelectedIndex;
+
+            waveIn = new WaveInEvent();
+            waveIn.DeviceNumber = deviceNumber;
+
+            waveIn.WaveFormat = new WaveFormat(waveRate, 2);
+            waveInBlockSize = waveIn.WaveFormat.AverageBytesPerSecond / 50;
+
+            dscStream = Vclient.CreatePCMStream(AudioApplication.Music);
+            dscStream.Clear();
+
+            waveIn.DataAvailable += (_, ee) =>
+            {
+                dscStream.WriteAsync(ee.Buffer, 0, ee.BytesRecorded, cancellationToken.Token).Wait();
+            };
+
+            try
+            {
+                waveIn.StartRecording();
+                setBotActivity(waveIn_comboBox.Text, ActivityType.Listening);
+                waveIn_play_button.Enabled = false;
+                waveIn_comboBox.Enabled = false;
+                waveIn_stop_button.Enabled = true;
+                player_groupBox.Enabled = false;
+                wave_rate_groupBox.Enabled = false;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                MessageBox.Show("指定された入力デバイスにアクセスできませんでした。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            
+        }
+
+
+        private void waveIn_stop_button_Click(object sender, EventArgs e)
+        {
+            waveIn?.StopRecording();
+            waveIn?.Dispose();
+            waveIn = null;
+
+            dscStream?.Close();
+            dscStream?.Clear();
+            dscStream?.Dispose();
+            dscStream = null;
+
+            waveIn_play_button.Enabled = true;
+            waveIn_comboBox.Enabled = true;
+            waveIn_stop_button.Enabled = false;
+            player_groupBox.Enabled = true;
+            wave_rate_groupBox.Enabled = true;
+            setBotActivity("", ActivityType.Listening);
+            //Task.Delay(5000);
         }
     }
 }

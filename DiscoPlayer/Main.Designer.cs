@@ -30,8 +30,10 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.token_show_checkBox = new System.Windows.Forms.CheckBox();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.token_textBox = new System.Windows.Forms.TextBox();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.token_show_checkBox = new System.Windows.Forms.CheckBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.label1 = new System.Windows.Forms.Label();
             this.voicechannel_id_textBox = new System.Windows.Forms.TextBox();
@@ -57,7 +59,6 @@
             this.player_play_button = new System.Windows.Forms.Button();
             this.player_pause_button = new System.Windows.Forms.Button();
             this.wave_rate_groupBox = new System.Windows.Forms.GroupBox();
-            this.clear_rate_button = new System.Windows.Forms.Button();
             this.wave_rate_trackBar = new System.Windows.Forms.TrackBar();
             this.mp3_openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.playlist_groupBox = new System.Windows.Forms.GroupBox();
@@ -69,7 +70,17 @@
             this.folder_browse_button = new System.Windows.Forms.Button();
             this.music_folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.playList_saveFileDialog = new System.Windows.Forms.SaveFileDialog();
+            this.waveIn_groupBox = new System.Windows.Forms.GroupBox();
+            this.waveIn_reload_button = new System.Windows.Forms.Button();
+            this.waveIn_stop_button = new System.Windows.Forms.Button();
+            this.waveIn_play_button = new System.Windows.Forms.Button();
+            this.waveIn_comboBox = new System.Windows.Forms.ComboBox();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.clear_rate_button = new System.Windows.Forms.Button();
+            this.panel4 = new System.Windows.Forms.Panel();
             this.groupBox2.SuspendLayout();
+            this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.player_trackBar)).BeginInit();
             this.player_groupBox.SuspendLayout();
@@ -78,44 +89,67 @@
             this.wave_rate_groupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.wave_rate_trackBar)).BeginInit();
             this.playlist_groupBox.SuspendLayout();
+            this.waveIn_groupBox.SuspendLayout();
+            this.panel3.SuspendLayout();
+            this.panel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.token_show_checkBox);
-            this.groupBox2.Controls.Add(this.token_textBox);
+            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox2.Controls.Add(this.panel1);
+            this.groupBox2.Controls.Add(this.panel2);
             this.groupBox2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.groupBox2.Location = new System.Drawing.Point(12, 12);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(658, 59);
+            this.groupBox2.Size = new System.Drawing.Size(730, 51);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "トークン";
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.token_textBox);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(3, 19);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(702, 29);
+            this.panel1.TabIndex = 5;
+            // 
+            // token_textBox
+            // 
+            this.token_textBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.token_textBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.token_textBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.token_textBox.Font = new System.Drawing.Font("ＭＳ ゴシック", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.token_textBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.token_textBox.Location = new System.Drawing.Point(0, 0);
+            this.token_textBox.Name = "token_textBox";
+            this.token_textBox.PasswordChar = '*';
+            this.token_textBox.Size = new System.Drawing.Size(702, 23);
+            this.token_textBox.TabIndex = 0;
+            this.token_textBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.token_show_checkBox);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panel2.Location = new System.Drawing.Point(705, 19);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(22, 29);
+            this.panel2.TabIndex = 4;
             // 
             // token_show_checkBox
             // 
             this.token_show_checkBox.AutoSize = true;
             this.token_show_checkBox.Checked = true;
             this.token_show_checkBox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.token_show_checkBox.Location = new System.Drawing.Point(637, 27);
+            this.token_show_checkBox.Location = new System.Drawing.Point(4, 5);
             this.token_show_checkBox.Name = "token_show_checkBox";
             this.token_show_checkBox.Size = new System.Drawing.Size(15, 14);
             this.token_show_checkBox.TabIndex = 1;
             this.token_show_checkBox.UseVisualStyleBackColor = true;
-            this.token_show_checkBox.CheckedChanged += new System.EventHandler(this.Token_show_checkBox_CheckedChanged);
-            // 
-            // token_textBox
-            // 
-            this.token_textBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.token_textBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.token_textBox.Font = new System.Drawing.Font("ＭＳ ゴシック", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.token_textBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.token_textBox.Location = new System.Drawing.Point(6, 22);
-            this.token_textBox.Name = "token_textBox";
-            this.token_textBox.PasswordChar = '*';
-            this.token_textBox.Size = new System.Drawing.Size(625, 23);
-            this.token_textBox.TabIndex = 0;
-            this.token_textBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // groupBox3
             // 
@@ -127,7 +161,7 @@
             this.groupBox3.Controls.Add(this.channel_in_button);
             this.groupBox3.Controls.Add(this.channel_out_button);
             this.groupBox3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.groupBox3.Location = new System.Drawing.Point(12, 77);
+            this.groupBox3.Location = new System.Drawing.Point(12, 69);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(422, 118);
             this.groupBox3.TabIndex = 2;
@@ -244,7 +278,7 @@
             this.player_groupBox.Controls.Add(this.player_trackBar);
             this.player_groupBox.Enabled = false;
             this.player_groupBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.player_groupBox.Location = new System.Drawing.Point(12, 201);
+            this.player_groupBox.Location = new System.Drawing.Point(12, 266);
             this.player_groupBox.Name = "player_groupBox";
             this.player_groupBox.Size = new System.Drawing.Size(422, 237);
             this.player_groupBox.TabIndex = 0;
@@ -418,37 +452,28 @@
             // 
             // wave_rate_groupBox
             // 
-            this.wave_rate_groupBox.Controls.Add(this.clear_rate_button);
+            this.wave_rate_groupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.wave_rate_groupBox.Controls.Add(this.panel4);
             this.wave_rate_groupBox.Controls.Add(this.wave_rate_trackBar);
             this.wave_rate_groupBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.wave_rate_groupBox.Location = new System.Drawing.Point(12, 455);
+            this.wave_rate_groupBox.Location = new System.Drawing.Point(12, 518);
             this.wave_rate_groupBox.Name = "wave_rate_groupBox";
-            this.wave_rate_groupBox.Size = new System.Drawing.Size(658, 68);
+            this.wave_rate_groupBox.Size = new System.Drawing.Size(730, 68);
             this.wave_rate_groupBox.TabIndex = 4;
             this.wave_rate_groupBox.TabStop = false;
             this.wave_rate_groupBox.Text = "周波数: 48000Hz";
             // 
-            // clear_rate_button
-            // 
-            this.clear_rate_button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.clear_rate_button.Image = global::DiscoPlayer.Properties.Resources.icons8_refresh_16;
-            this.clear_rate_button.Location = new System.Drawing.Point(625, 22);
-            this.clear_rate_button.Name = "clear_rate_button";
-            this.clear_rate_button.Size = new System.Drawing.Size(27, 33);
-            this.clear_rate_button.TabIndex = 16;
-            this.clear_rate_button.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.clear_rate_button.UseVisualStyleBackColor = true;
-            this.clear_rate_button.Click += new System.EventHandler(this.Clear_rate_button_Click);
-            // 
             // wave_rate_trackBar
             // 
+            this.wave_rate_trackBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.wave_rate_trackBar.AutoSize = false;
-            this.wave_rate_trackBar.Dock = System.Windows.Forms.DockStyle.Left;
             this.wave_rate_trackBar.Location = new System.Drawing.Point(3, 19);
             this.wave_rate_trackBar.Maximum = 68000;
             this.wave_rate_trackBar.Minimum = 28000;
             this.wave_rate_trackBar.Name = "wave_rate_trackBar";
-            this.wave_rate_trackBar.Size = new System.Drawing.Size(616, 46);
+            this.wave_rate_trackBar.Size = new System.Drawing.Size(688, 46);
             this.wave_rate_trackBar.TabIndex = 8;
             this.wave_rate_trackBar.TickFrequency = 10000;
             this.wave_rate_trackBar.TickStyle = System.Windows.Forms.TickStyle.Both;
@@ -472,9 +497,9 @@
             this.playlist_groupBox.Controls.Add(this.file_browse_button);
             this.playlist_groupBox.Controls.Add(this.folder_browse_button);
             this.playlist_groupBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.playlist_groupBox.Location = new System.Drawing.Point(440, 77);
+            this.playlist_groupBox.Location = new System.Drawing.Point(455, 69);
             this.playlist_groupBox.Name = "playlist_groupBox";
-            this.playlist_groupBox.Size = new System.Drawing.Size(230, 361);
+            this.playlist_groupBox.Size = new System.Drawing.Size(287, 434);
             this.playlist_groupBox.TabIndex = 3;
             this.playlist_groupBox.TabStop = false;
             this.playlist_groupBox.Text = "プレイリスト: 0/0";
@@ -483,7 +508,7 @@
             // 
             this.delete_music_button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.delete_music_button.Image = global::DiscoPlayer.Properties.Resources.icons8_delete_16;
-            this.delete_music_button.Location = new System.Drawing.Point(166, 325);
+            this.delete_music_button.Location = new System.Drawing.Point(224, 400);
             this.delete_music_button.Name = "delete_music_button";
             this.delete_music_button.Size = new System.Drawing.Size(26, 23);
             this.delete_music_button.TabIndex = 19;
@@ -494,7 +519,7 @@
             // 
             this.clear_playlist_button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.clear_playlist_button.Image = global::DiscoPlayer.Properties.Resources.icons8_trash_16;
-            this.clear_playlist_button.Location = new System.Drawing.Point(198, 325);
+            this.clear_playlist_button.Location = new System.Drawing.Point(256, 400);
             this.clear_playlist_button.Name = "clear_playlist_button";
             this.clear_playlist_button.Size = new System.Drawing.Size(26, 23);
             this.clear_playlist_button.TabIndex = 18;
@@ -505,7 +530,7 @@
             // 
             this.save_playlist_button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.save_playlist_button.Image = global::DiscoPlayer.Properties.Resources.icons8_save_16;
-            this.save_playlist_button.Location = new System.Drawing.Point(70, 325);
+            this.save_playlist_button.Location = new System.Drawing.Point(70, 400);
             this.save_playlist_button.Name = "save_playlist_button";
             this.save_playlist_button.Size = new System.Drawing.Size(26, 23);
             this.save_playlist_button.TabIndex = 17;
@@ -524,7 +549,7 @@
             this.playlist_listBox.Location = new System.Drawing.Point(3, 19);
             this.playlist_listBox.Name = "playlist_listBox";
             this.playlist_listBox.ScrollAlwaysVisible = true;
-            this.playlist_listBox.Size = new System.Drawing.Size(224, 300);
+            this.playlist_listBox.Size = new System.Drawing.Size(281, 375);
             this.playlist_listBox.TabIndex = 0;
             this.playlist_listBox.SelectedIndexChanged += new System.EventHandler(this.Playlist_listBox_SelectedIndexChanged);
             this.playlist_listBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Playlist_listBox_MouseDown);
@@ -534,7 +559,7 @@
             // 
             this.file_browse_button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.file_browse_button.Image = global::DiscoPlayer.Properties.Resources.icons8_mp3_16;
-            this.file_browse_button.Location = new System.Drawing.Point(6, 325);
+            this.file_browse_button.Location = new System.Drawing.Point(6, 400);
             this.file_browse_button.Name = "file_browse_button";
             this.file_browse_button.Size = new System.Drawing.Size(26, 23);
             this.file_browse_button.TabIndex = 9;
@@ -545,7 +570,7 @@
             // 
             this.folder_browse_button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.folder_browse_button.Image = global::DiscoPlayer.Properties.Resources.icons8_folder_16;
-            this.folder_browse_button.Location = new System.Drawing.Point(38, 325);
+            this.folder_browse_button.Location = new System.Drawing.Point(38, 400);
             this.folder_browse_button.Name = "folder_browse_button";
             this.folder_browse_button.Size = new System.Drawing.Size(26, 23);
             this.folder_browse_button.TabIndex = 16;
@@ -558,31 +583,130 @@
             this.playList_saveFileDialog.Filter = "プレイリスト|*.playlist";
             this.playList_saveFileDialog.Title = "プレイリストを保存";
             // 
+            // waveIn_groupBox
+            // 
+            this.waveIn_groupBox.Controls.Add(this.waveIn_reload_button);
+            this.waveIn_groupBox.Controls.Add(this.waveIn_stop_button);
+            this.waveIn_groupBox.Controls.Add(this.waveIn_play_button);
+            this.waveIn_groupBox.Controls.Add(this.waveIn_comboBox);
+            this.waveIn_groupBox.Enabled = false;
+            this.waveIn_groupBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.waveIn_groupBox.Location = new System.Drawing.Point(12, 193);
+            this.waveIn_groupBox.Name = "waveIn_groupBox";
+            this.waveIn_groupBox.Size = new System.Drawing.Size(422, 63);
+            this.waveIn_groupBox.TabIndex = 5;
+            this.waveIn_groupBox.TabStop = false;
+            this.waveIn_groupBox.Text = "入力デバイス音源";
+            // 
+            // waveIn_reload_button
+            // 
+            this.waveIn_reload_button.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.waveIn_reload_button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.waveIn_reload_button.Image = global::DiscoPlayer.Properties.Resources.icons8_refresh_16;
+            this.waveIn_reload_button.Location = new System.Drawing.Point(266, 24);
+            this.waveIn_reload_button.Name = "waveIn_reload_button";
+            this.waveIn_reload_button.Size = new System.Drawing.Size(45, 23);
+            this.waveIn_reload_button.TabIndex = 6;
+            this.waveIn_reload_button.UseVisualStyleBackColor = true;
+            this.waveIn_reload_button.Click += new System.EventHandler(this.waveIn_reload_button_Click);
+            // 
+            // waveIn_stop_button
+            // 
+            this.waveIn_stop_button.Enabled = false;
+            this.waveIn_stop_button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.waveIn_stop_button.Image = global::DiscoPlayer.Properties.Resources.icons8_stop_16__1_;
+            this.waveIn_stop_button.Location = new System.Drawing.Point(368, 24);
+            this.waveIn_stop_button.Name = "waveIn_stop_button";
+            this.waveIn_stop_button.Size = new System.Drawing.Size(45, 23);
+            this.waveIn_stop_button.TabIndex = 5;
+            this.waveIn_stop_button.UseVisualStyleBackColor = true;
+            this.waveIn_stop_button.Click += new System.EventHandler(this.waveIn_stop_button_Click);
+            // 
+            // waveIn_play_button
+            // 
+            this.waveIn_play_button.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.waveIn_play_button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.waveIn_play_button.Image = global::DiscoPlayer.Properties.Resources.icons8_circled_play_16;
+            this.waveIn_play_button.Location = new System.Drawing.Point(317, 24);
+            this.waveIn_play_button.Name = "waveIn_play_button";
+            this.waveIn_play_button.Size = new System.Drawing.Size(45, 23);
+            this.waveIn_play_button.TabIndex = 4;
+            this.waveIn_play_button.UseVisualStyleBackColor = true;
+            this.waveIn_play_button.Click += new System.EventHandler(this.waveIn_play_button_Click);
+            // 
+            // waveIn_comboBox
+            // 
+            this.waveIn_comboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.waveIn_comboBox.FormattingEnabled = true;
+            this.waveIn_comboBox.Location = new System.Drawing.Point(9, 24);
+            this.waveIn_comboBox.Name = "waveIn_comboBox";
+            this.waveIn_comboBox.Size = new System.Drawing.Size(251, 23);
+            this.waveIn_comboBox.TabIndex = 0;
+            // 
+            // panel3
+            // 
+            this.panel3.AllowDrop = true;
+            this.panel3.Controls.Add(this.waveIn_groupBox);
+            this.panel3.Controls.Add(this.playlist_groupBox);
+            this.panel3.Controls.Add(this.groupBox2);
+            this.panel3.Controls.Add(this.player_groupBox);
+            this.panel3.Controls.Add(this.groupBox3);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel3.Location = new System.Drawing.Point(0, 0);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(754, 516);
+            this.panel3.TabIndex = 6;
+            this.panel3.DragDrop += new System.Windows.Forms.DragEventHandler(this.Main_DragDrop);
+            this.panel3.DragEnter += new System.Windows.Forms.DragEventHandler(this.Main_DragEnter);
+            // 
+            // clear_rate_button
+            // 
+            this.clear_rate_button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.clear_rate_button.Image = global::DiscoPlayer.Properties.Resources.icons8_refresh_16;
+            this.clear_rate_button.Location = new System.Drawing.Point(7, 0);
+            this.clear_rate_button.Name = "clear_rate_button";
+            this.clear_rate_button.Size = new System.Drawing.Size(30, 40);
+            this.clear_rate_button.TabIndex = 17;
+            this.clear_rate_button.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.clear_rate_button.UseVisualStyleBackColor = true;
+            this.clear_rate_button.Click += new System.EventHandler(this.Clear_rate_button_Click);
+            // 
+            // panel4
+            // 
+            this.panel4.Controls.Add(this.clear_rate_button);
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panel4.Location = new System.Drawing.Point(688, 19);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(39, 46);
+            this.panel4.TabIndex = 18;
+            // 
             // Main
             // 
             this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.ClientSize = new System.Drawing.Size(684, 451);
+            this.ClientSize = new System.Drawing.Size(754, 516);
             this.Controls.Add(this.wave_rate_groupBox);
-            this.Controls.Add(this.playlist_groupBox);
-            this.Controls.Add(this.groupBox3);
-            this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.player_groupBox);
+            this.Controls.Add(this.panel3);
+            this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Yu Gothic UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(770, 635);
+            this.MinimumSize = new System.Drawing.Size(462, 305);
             this.Name = "Main";
-            this.Text = "DiscoPlayer v1.10";
+            this.Text = "DiscoPlayer v2.00";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Main_FormClosing);
             this.Load += new System.EventHandler(this.Main_Load);
             this.DragDrop += new System.Windows.Forms.DragEventHandler(this.Main_DragDrop);
             this.DragEnter += new System.Windows.Forms.DragEventHandler(this.Main_DragEnter);
             this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.player_trackBar)).EndInit();
@@ -593,14 +717,15 @@
             this.wave_rate_groupBox.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.wave_rate_trackBar)).EndInit();
             this.playlist_groupBox.ResumeLayout(false);
+            this.waveIn_groupBox.ResumeLayout(false);
+            this.panel3.ResumeLayout(false);
+            this.panel4.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.TextBox token_textBox;
-        private System.Windows.Forms.CheckBox token_show_checkBox;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Button channel_in_button;
         private System.Windows.Forms.Button channel_out_button;
@@ -637,6 +762,17 @@
         private System.Windows.Forms.TextBox voicechannel_id_textBox;
         private System.Windows.Forms.GroupBox wave_rate_groupBox;
         private System.Windows.Forms.TrackBar wave_rate_trackBar;
+        private System.Windows.Forms.GroupBox waveIn_groupBox;
+        private System.Windows.Forms.ComboBox waveIn_comboBox;
+        private System.Windows.Forms.Button waveIn_stop_button;
+        private System.Windows.Forms.Button waveIn_play_button;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.TextBox token_textBox;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.CheckBox token_show_checkBox;
+        private System.Windows.Forms.Button waveIn_reload_button;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Button clear_rate_button;
     }
 }

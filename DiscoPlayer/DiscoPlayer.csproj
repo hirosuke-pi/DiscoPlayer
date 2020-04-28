@@ -231,6 +231,13 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <None Include="Resources\icons8-refresh-16 %281%29.png" />
+    <None Include="Resources\icons8-eject-16.png" />
+    <None Include="Resources\icons8-stop-16 %281%29.png" />
+    <None Include="Resources\icons8-circled-play-16.png" />
+    <None Include="Resources\icons8-stop-squared-16.png" />
+    <None Include="Resources\icons8-stop-16.png" />
+    <None Include="Resources\icons8-play-16.png" />
     <None Include="Resources\icons8-refresh-16.png" />
     <None Include="Resources\icons8-trash-16.png" />
     <None Include="Resources\icons8-up-squared-16.png" />

@@ -63,6 +63,16 @@ namespace DiscoPlayer.Properties {
         /// <summary>
         ///   型 System.Drawing.Bitmap のローカライズされたリソースを検索します。
         /// </summary>
+        internal static System.Drawing.Bitmap icons8_circled_play_16 {
+            get {
+                object obj = ResourceManager.GetObject("icons8_circled_play_16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   型 System.Drawing.Bitmap のローカライズされたリソースを検索します。
+        /// </summary>
         internal static System.Drawing.Bitmap icons8_connected_16 {
             get {
                 object obj = ResourceManager.GetObject("icons8_connected_16", resourceCulture);
@@ -176,6 +186,16 @@ namespace DiscoPlayer.Properties {
         internal static System.Drawing.Bitmap icons8_skip_to_start_40 {
             get {
                 object obj = ResourceManager.GetObject("icons8_skip_to_start_40", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   型 System.Drawing.Bitmap のローカライズされたリソースを検索します。
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_stop_16__1_ {
+            get {
+                object obj = ResourceManager.GetObject("icons8_stop_16__1_", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
