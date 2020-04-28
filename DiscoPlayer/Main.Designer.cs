@@ -59,6 +59,8 @@
             this.player_play_button = new System.Windows.Forms.Button();
             this.player_pause_button = new System.Windows.Forms.Button();
             this.wave_rate_groupBox = new System.Windows.Forms.GroupBox();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.clear_rate_button = new System.Windows.Forms.Button();
             this.wave_rate_trackBar = new System.Windows.Forms.TrackBar();
             this.mp3_openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.playlist_groupBox = new System.Windows.Forms.GroupBox();
@@ -76,8 +78,6 @@
             this.waveIn_play_button = new System.Windows.Forms.Button();
             this.waveIn_comboBox = new System.Windows.Forms.ComboBox();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.clear_rate_button = new System.Windows.Forms.Button();
-            this.panel4 = new System.Windows.Forms.Panel();
             this.groupBox2.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -87,11 +87,11 @@
             this.volume_groupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.volume_trackBar)).BeginInit();
             this.wave_rate_groupBox.SuspendLayout();
+            this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.wave_rate_trackBar)).BeginInit();
             this.playlist_groupBox.SuspendLayout();
             this.waveIn_groupBox.SuspendLayout();
             this.panel3.SuspendLayout();
-            this.panel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox2
@@ -150,6 +150,7 @@
             this.token_show_checkBox.Size = new System.Drawing.Size(15, 14);
             this.token_show_checkBox.TabIndex = 1;
             this.token_show_checkBox.UseVisualStyleBackColor = true;
+            this.token_show_checkBox.CheckedChanged += new System.EventHandler(this.Token_show_checkBox_CheckedChanged);
             // 
             // groupBox3
             // 
@@ -464,6 +465,27 @@
             this.wave_rate_groupBox.TabStop = false;
             this.wave_rate_groupBox.Text = "周波数: 48000Hz";
             // 
+            // panel4
+            // 
+            this.panel4.Controls.Add(this.clear_rate_button);
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panel4.Location = new System.Drawing.Point(688, 19);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(39, 46);
+            this.panel4.TabIndex = 18;
+            // 
+            // clear_rate_button
+            // 
+            this.clear_rate_button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.clear_rate_button.Image = global::DiscoPlayer.Properties.Resources.icons8_refresh_16;
+            this.clear_rate_button.Location = new System.Drawing.Point(7, 0);
+            this.clear_rate_button.Name = "clear_rate_button";
+            this.clear_rate_button.Size = new System.Drawing.Size(30, 40);
+            this.clear_rate_button.TabIndex = 17;
+            this.clear_rate_button.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.clear_rate_button.UseVisualStyleBackColor = true;
+            this.clear_rate_button.Click += new System.EventHandler(this.Clear_rate_button_Click);
+            // 
             // wave_rate_trackBar
             // 
             this.wave_rate_trackBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -659,27 +681,6 @@
             this.panel3.DragDrop += new System.Windows.Forms.DragEventHandler(this.Main_DragDrop);
             this.panel3.DragEnter += new System.Windows.Forms.DragEventHandler(this.Main_DragEnter);
             // 
-            // clear_rate_button
-            // 
-            this.clear_rate_button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.clear_rate_button.Image = global::DiscoPlayer.Properties.Resources.icons8_refresh_16;
-            this.clear_rate_button.Location = new System.Drawing.Point(7, 0);
-            this.clear_rate_button.Name = "clear_rate_button";
-            this.clear_rate_button.Size = new System.Drawing.Size(30, 40);
-            this.clear_rate_button.TabIndex = 17;
-            this.clear_rate_button.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.clear_rate_button.UseVisualStyleBackColor = true;
-            this.clear_rate_button.Click += new System.EventHandler(this.Clear_rate_button_Click);
-            // 
-            // panel4
-            // 
-            this.panel4.Controls.Add(this.clear_rate_button);
-            this.panel4.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel4.Location = new System.Drawing.Point(688, 19);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(39, 46);
-            this.panel4.TabIndex = 18;
-            // 
             // Main
             // 
             this.AllowDrop = true;
@@ -715,11 +716,11 @@
             this.volume_groupBox.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.volume_trackBar)).EndInit();
             this.wave_rate_groupBox.ResumeLayout(false);
+            this.panel4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.wave_rate_trackBar)).EndInit();
             this.playlist_groupBox.ResumeLayout(false);
             this.waveIn_groupBox.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
-            this.panel4.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
